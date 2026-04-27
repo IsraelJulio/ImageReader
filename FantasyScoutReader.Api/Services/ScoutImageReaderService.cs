@@ -26,6 +26,11 @@ public class ScoutImageReaderService : IScoutImageReaderService
             request.Image,
             prompt);
 
+        aiJson = aiJson
+            .Replace("```json", "")
+            .Replace("```", "")
+            .Trim();
+
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
