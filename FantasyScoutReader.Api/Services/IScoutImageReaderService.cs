@@ -1,6 +1,8 @@
-﻿namespace FantasyScoutReader.Api.Services
+﻿using FantasyScoutReader.Api.Models;
+
+namespace FantasyScoutReader.Api.Services;
+
+public interface IScoutImageReaderService
 {
-    public interface IScoutImageReaderService
-    {
-    }
+    Task<ScoutImageReadResponse> ReadImageAsync(ScoutImageReadRequest request);
 }
