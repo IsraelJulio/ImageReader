@@ -1,33 +1,43 @@
-﻿using FantasyScoutReader.Api.Models;
+﻿using System.Text.Json;
+using FantasyScoutReader.Api.Models;
 
 namespace FantasyScoutReader.Api.Services;
 
 public class ScoutImageReaderService : IScoutImageReaderService
 {
+    private readonly IAiScoutPromptBuilder _promptBuilder;
+    private readonly IAiScoutClient _aiScoutClient;
+
+    public ScoutImageReaderService(
+        IAiScoutPromptBuilder promptBuilder,
+        IAiScoutClient aiScoutClient)
+    {
+        _promptBuilder = promptBuilder;
+        _aiScoutClient = aiScoutClient;
+    }
+
     public async Task<ScoutImageReadResponse> ReadImageAsync(ScoutImageReadRequest request)
     {
-        await Task.Delay(500);
+        var prompt = _promptBuilder.BuildPrompt(
+            request.RodadaId,
+            request.NumeroDaRodada);
+
+        var aiJson = await _aiScoutClient.ReadScoutImageAsync(
+            request.Image,
+            prompt);
+
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        var scouts = JsonSerializer.Deserialize<List<RodadaRequest>>(aiJson, options);
 
         return new ScoutImageReadResponse
         {
             Success = true,
-            Message = "Imagem lida com sucesso. Resultado mockado por enquanto.",
-            Scouts =
-            [
-                new RodadaRequest
-                {
-                    Nome = "Jogador Exemplo",
-                    JogadorId = 0,
-                    EstatisticaId = 0,
-                    RodadaId = request.RodadaId,
-                    NumeroDaRodada = request.NumeroDaRodada,
-                    Gol = 1,
-                    Assistencia = 1,
-                    Finalizacao = 3,
-                    Desarme = 2,
-                    CAMarelo = 1
-                }
-            ]
+            Message = "Imagem processada pela IA.",
+            Scouts = scouts ?? []
         };
     }
 }

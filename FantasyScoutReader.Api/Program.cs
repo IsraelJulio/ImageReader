@@ -7,6 +7,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IScoutImageReaderService, ScoutImageReaderService>();
+builder.Services.AddScoped<IAiScoutPromptBuilder, AiScoutPromptBuilder>();
+builder.Services.AddScoped<IAiScoutClient, FakeAiScoutClient>();
 
 var app = builder.Build();
 
