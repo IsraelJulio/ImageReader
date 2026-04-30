@@ -11,6 +11,7 @@ builder.Services.AddScoped<IAiScoutPromptBuilder, AiScoutPromptBuilder>();
 builder.Services.AddScoped<IAiScoutClient, OpenAiScoutClient>();
 builder.Services.Configure<OpenAiSettings>(
     builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddScoped<IAiQuestionClient, OpenAiQuestionClient>();
 var app = builder.Build();
 
 app.UseSwagger();
