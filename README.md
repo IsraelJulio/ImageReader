@@ -1,63 +1,115 @@
 # 🧠 Fantasy Image Reader API
 
-API desenvolvida em .NET que utiliza inteligência artificial para processar imagens e extrair informações estruturadas, transformando-as em objetos utilizáveis no sistema.
+![.NET](https://img.shields.io/badge/.NET-8/9-blue)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-private-lightgrey)
+
+API em **.NET** que utiliza inteligência artificial para **ler imagens (ex: súmulas)** e transformar em **dados estruturados prontos para uso**.
+
+---
 
 ## 🚀 Objetivo
 
-Permitir que o usuário envie imagens (como súmulas de partidas) e receba como resposta dados organizados prontos para uso no sistema.
+Automatizar o processo de entrada de dados no fantasy:
 
-## 🧩 Funcionalidades
+📷 Imagem → 🤖 IA → 📊 JSON estruturado
 
-- Upload de imagem
-- Processamento via IA
-- Extração de dados
-- Conversão para classes C#
-- Endpoint de pergunta/resposta
+Ideal para:
+- Scouts de rodada
+- Estatísticas de jogadores
+- Automação de input manual
 
-## 🏗️ Estrutura
+---
 
-Fantasy.ImageReader/
-Controllers/
-Services/
-Models/
-DTOs/
-Infrastructure/
-Utils/
+## 🎥 Demo
 
-## ⚙️ Tecnologias
+![Demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2demoexample/giphy.gif)
+
+> Exemplo: upload de imagem → retorno estruturado via API
+
+---
+
+## ⚙️ Stack
 
 - .NET 8 / 9
-- ASP.NET Core
-- OpenAI API
+- ASP.NET Core Web API
+- OpenAI (Vision / GPT)
 - Swagger
+
+---
+
+## 📡 Endpoints
+
+### 📷 Processar imagem
+POST /api/image/process
+
+### 💬 Perguntar para IA
+POST /api/ai/ask
+
+---
+
+## 🧠 Como funciona
+
+1. Upload da imagem  
+2. Conversão para base64  
+3. Envio para IA  
+4. Interpretação dos dados  
+5. Retorno em JSON  
+6. Mapeamento para classes C#  
+
+---
 
 ## 🔐 Configuração
 
-Adicionar no appsettings.json:
+appsettings.json:
 
 "OpenAI": {
   "ApiKey": "SUA_CHAVE_AQUI"
 }
 
-## 📡 Endpoints
+---
 
-POST /api/image/process
-POST /api/ai/ask
+## 📌 Exemplo de resposta
 
-## 🧠 Fluxo
+{
+  "jogo": "Brasilia x Santo Antonio",
+  "jogadores": [
+    {
+      "nome": "Isaque",
+      "gols": 2,
+      "assistencias": 1
+    }
+  ]
+}
 
-1. Envia imagem
-2. IA processa
-3. Retorna JSON
-4. API converte para classe
+---
 
 ## 🛠️ Roadmap
 
-- Upload múltiplo
-- Melhorar prompts
-- Validação de dados
-- Integração com fantasy
+- [ ] Upload de múltiplas imagens  
+- [ ] Suporte a abreviações (G, A, CA, CV)  
+- [ ] Validação automática  
+- [ ] Integração direta com 4Fantasy  
+- [ ] Cache de resultados  
 
-## 👨‍💻 Autor
+---
 
-Projeto 4Fantasy
+## 🏗️ Arquitetura
+
+Controllers → Services → Models → Infrastructure
+
+- Separação de responsabilidades  
+- Fácil manutenção  
+- Escalável  
+
+---
+
+## 👨‍💻 Projeto
+
+Parte do ecossistema **4Fantasy**
+
+---
+
+## 📄 Licença
+
+Uso privado
